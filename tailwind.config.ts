@@ -11,6 +11,15 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        "bg-alt": "var(--background-alt)",
+        accent: "#00838f",
+        "fg-alt": "var(--foreground-alt)",
+      },
+      margin: {
+        nav: "var(--navbar-height)",
+      },
+      padding: {
+        nav: "var(--navbar-height)",
       },
     },
   },

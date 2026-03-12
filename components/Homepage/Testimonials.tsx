@@ -55,12 +55,7 @@ type TestimonialCardProps = {
   img: string;
 };
 
-const TestimonialCard = ({
-  quote,
-  name,
-  identifier,
-  img,
-}: TestimonialCardProps) => {
+const TestimonialCard = ({ quote, name, identifier }: TestimonialCardProps) => {
   return (
     <div className="p-4 flex flex-col gap-4 border border-gray-300 rounded-lg shadow-md w-fit bg-bg-alt">
       <p className="max-w-[30ch]">{quote}</p>

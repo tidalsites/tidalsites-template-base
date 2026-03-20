@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
+import { Montserrat } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import "./globals.css";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Tidal Sites Template",
+  title: "Generic Construction Co.",
   description: "A template for Tidal Sites websites",
 };
+
+const montserrat = Montserrat({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
@@ -15,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={montserrat.className}>
         <Navbar />
         {children}
         <Footer />

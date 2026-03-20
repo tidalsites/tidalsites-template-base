@@ -3,9 +3,14 @@
 import { FC, useState, useEffect } from "react";
 import Link from "next/link";
 import { MdOutlineMenuOpen, MdClose } from "react-icons/md";
+import { LuMenu } from "react-icons/lu";
+import { usePathname } from "next/navigation";
+import { NavLink } from "./NavLink";
 
 export const Navbar: FC = () => {
   const [dropdownActivated, setDropdownActivated] = useState<boolean>(false);
+
+  const pathname = usePathname();
 
   const activateDropdown = () => {
     document.body.classList.add("no-scroll");
@@ -22,14 +27,17 @@ export const Navbar: FC = () => {
   }, []);
 
   return (
-    <header className="w-[100vw] fixed z-10 bg-background">
+    <header className="w-[100vw] fixed z-10 backdrop-blur-lg bg-black/50">
       <div className="w-full max-w-page flex gap-2 mx-auto">
         <div className="grow flex justify-between px-10 items-center">
           <div className="py-1">
             <Link className="flex items-center gap-4 relative py-1" href="/">
-              <div className="w-6 h-6 bg-accent rotate-45"></div>
-              <span aria-hidden className="font-bold text-3xl hidden sm:block">
-                Logo
+              <div className="w-6 h-6 bg-accent rotate-45 rounded-md outline outline-white -outline-offset-[10px] border-4 border-white"></div>
+              <span
+                aria-hidden
+                className="font-bold text-xl hidden min-[900px]:block"
+              >
+                Generic Construction Co.
               </span>
             </Link>
           </div>
@@ -40,58 +48,31 @@ export const Navbar: FC = () => {
             className="md:hidden transition-all hover:bg-black hover:text-white duration-400 hover:outline-offset-2"
             onClick={activateDropdown}
           >
-            <MdOutlineMenuOpen className="text-4xl" />
+            <LuMenu className="text-4xl" />
           </button>
           <nav aria-label="Primary Navigation" className="hidden md:block">
-            <ul className="flex gap-4 flex-wrap justify-end">
-              <li className="relative">
-                <Link
-                  className="transition-colors after:absolute after:bottom-0 after:left-[50%] after:w-0 after:h-[2px] after:bg-[--theme] after:transition-all hover:[text-shadow:_0_0px_8px_rgba(255,255,255,.5),0_0px_12px_rgba(0,200,255,.5)] hover:after:w-full hover:after:left-0"
-                  href="/"
-                >
-                  HOME
-                </Link>
-              </li>
-              <li className="relative">
-                <Link
-                  className="transition-colors after:absolute after:bottom-0 after:left-[50%] after:w-0 after:h-[2px] after:bg-[--theme] after:transition-all hover:[text-shadow:_0_0px_8px_rgba(255,255,255,.5),0_0px_12px_rgba(0,200,255,.5)] hover:after:w-full hover:after:left-0"
-                  href="/about"
-                >
-                  ABOUT
-                </Link>
-              </li>
-              <li className="relative">
-                <Link
-                  className="transition-colors after:absolute after:bottom-0 after:left-[50%] after:w-0 after:h-[2px] after:bg-[--theme] after:transition-all hover:[text-shadow:_0_0px_8px_rgba(255,255,255,.5),0_0px_12px_rgba(0,200,255,.5)] hover:after:w-full hover:after:left-0"
-                  href="/services"
-                >
-                  SERVICES
-                </Link>
-              </li>
-              <li className="relative">
-                <Link
-                  className="transition-colors after:absolute after:bottom-0 after:left-[50%] after:w-0 after:h-[2px] after:bg-[--theme] after:transition-all hover:[text-shadow:_0_0px_8px_rgba(255,255,255,.5),0_0px_12px_rgba(0,200,255,.5)] hover:after:w-full hover:after:left-0"
-                  href="/portfolio"
-                >
-                  PORTFOLIO
-                </Link>
-              </li>
-              <li className="relative">
-                <Link
-                  className="transition-colors after:absolute after:bottom-0 after:left-[50%] after:w-0 after:h-[2px] after:bg-[--theme] after:transition-all hover:[text-shadow:_0_0px_8px_rgba(255,255,255,.5),0_0px_12px_rgba(0,200,255,.5)] hover:after:w-full hover:after:left-0"
-                  href="/blog"
-                >
-                  BLOG
-                </Link>
-              </li>
-              <li className="relative">
-                <Link
-                  className="transition-colors after:absolute after:bottom-0 after:left-[50%] after:w-0 after:h-[2px] after:bg-[--theme] after:transition-all hover:[text-shadow:_0_0px_8px_rgba(255,255,255,.5),0_0px_12px_rgba(0,200,255,.5)] hover:after:w-full hover:after:left-0"
-                  href="/contact"
-                >
-                  CONTACT
-                </Link>
-              </li>
+            <ul className="flex gap-2 flex-wrap justify-end">
+              <NavLink href="/" name="home" active={pathname === "/"} />
+              <NavLink
+                href="/about"
+                name="about"
+                active={pathname === "/about"}
+              />
+              <NavLink
+                href="/services"
+                name="services"
+                active={pathname === "/services"}
+              />
+              <NavLink
+                href="/portfolio"
+                name="portfolio"
+                active={pathname === "/portfolio"}
+              />
+              <NavLink
+                href="/contact"
+                name="contact"
+                active={pathname === "/contact"}
+              />
             </ul>
           </nav>
 
@@ -149,16 +130,6 @@ export const Navbar: FC = () => {
                     onClick={deactivateDropdown}
                   >
                     PORTFOLIO
-                  </span>
-                </Link>
-              </li>
-              <li className="w-full text-center border-b-[1px] border-[rgba(0,200,255,.25)]">
-                <Link href="/blog">
-                  <span
-                    className="flex justify-center w-full h-full py-4"
-                    onClick={deactivateDropdown}
-                  >
-                    BLOG
                   </span>
                 </Link>
               </li>
